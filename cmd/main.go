@@ -1,28 +1,24 @@
 package main
 
 import (
-	"example/work-at-olist-challenge/pkg/models"
+	"example/work-at-olist-challenge/controllers"
+	"example/work-at-olist-challenge/pkg/db"
+	"example/work-at-olist-challenge/pkg/services"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 )
 
 func main() {
-	db, err := gorm.Open(sqlite.Open("olist_db.db"), &gorm.Config{})
-	if err != nil {
-		panic("failed to connect database")
-	}
+	
+	db := db.Connect()
+	
+	book_service := services.NewBookService(db)
+	books_controller := controllers.NewBooksController(book_service)
 
-	// Migrate the schema
-	db.AutoMigrate(&models.Author{})
-  
+
+
 	server := gin.Default()
-	server.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello World",
-		})
-	})
+	server.GET("/books", books_controller.Create)
 
 	server.Run(":8080")
 }
