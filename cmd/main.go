@@ -1,9 +1,9 @@
 package main
 
 import (
-	"example/work-at-olist-challenge/pkg/controllers"
-	"example/work-at-olist-challenge/pkg/db"
-	"example/work-at-olist-challenge/pkg/services"
+	"example/work-at-olist-challenge/internal/controllers"
+	"example/work-at-olist-challenge/internal/db"
+	"example/work-at-olist-challenge/internal/services"
 
 	"github.com/gin-gonic/gin"
 )

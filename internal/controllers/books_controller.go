@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"example/work-at-olist-challenge/pkg/models"
-	"example/work-at-olist-challenge/pkg/services"
+	"example/work-at-olist-challenge/internal/models"
+	"example/work-at-olist-challenge/internal/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,8 +32,10 @@ func (bc BooksContoller) Create(c *gin.Context) {
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 	}
-	authors := bc.authorService.GetAuthorsByIDs(body.Authors)
-
+	authors, err := bc.authorService.GetAuthorsByIDs(body.Authors)
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+	}
 	book := models.Book{
 		Name: body.Name,
 		Edition: body.Edition,

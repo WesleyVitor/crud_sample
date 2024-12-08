@@ -1,7 +1,7 @@
 package services
 
 import (
-	"example/work-at-olist-challenge/pkg/models"
+	"example/work-at-olist-challenge/internal/models"
 
 	"gorm.io/gorm"
 )

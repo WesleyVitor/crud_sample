@@ -2,7 +2,7 @@ package main
 
 import (
 	"bufio"
-	"example/work-at-olist-challenge/pkg/models"
+	"example/work-at-olist-challenge/internal/models"
 	"fmt"
 	"log"
 	"os"
