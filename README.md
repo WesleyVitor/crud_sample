@@ -8,13 +8,19 @@
 
 ## How to use
 
-First, execute seed command to authors samples
+First, download and install libs used
+
+```bash
+go mod tidy
+```
+
+Second, execute seed command to authors samples
 
 ```bash
 go run seed/main.go
 ```
 
-Second, up server to request its endpoints
+Third, up server to request its endpoints
 ```bash
 go run main.go
 ```
