@@ -20,6 +20,10 @@ func main() {
 
 	server := gin.Default()
 	server.POST("/books", books_controller.Create)
+	server.GET("/books", books_controller.List)
+	server.GET("/books/:id", books_controller.Show)
+	server.DELETE("/books/:id", books_controller.Delete)
+	server.PUT("/books/:id", books_controller.Update)
 
 	server.Run(":8080")
 }
