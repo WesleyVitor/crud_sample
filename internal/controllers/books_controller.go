@@ -30,11 +30,11 @@ func (bc BooksContoller) Create(c *gin.Context) {
 	err := c.BindJSON(&body)
 	
 	if err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+		c.JSON(400, err.Error())
 	}
 	authors, err := bc.authorService.GetAuthorsByIDs(body.Authors)
 	if err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+		c.JSON(400, err.Error())
 	}
 	book := models.Book{
 		Name: body.Name,
@@ -85,13 +85,13 @@ func (bc BooksContoller) Update(c *gin.Context){
 	err := c.BindJSON(&body)
 	
 	if err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+		c.JSON(400, err.Error())
 	}
 	var authors []*models.Author
 	if len(body.Authors) != 0 {
 		authors, err = bc.authorService.GetAuthorsByIDs(body.Authors)
 		if err != nil {
-			c.JSON(400, gin.H{"error": err.Error()})
+			c.JSON(400, err.Error())
 		}
 	} else {
 		authors = []*models.Author{}

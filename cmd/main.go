@@ -4,6 +4,7 @@ import (
 	"example/work-at-olist-challenge/internal/controllers"
 	"example/work-at-olist-challenge/internal/db"
 	"example/work-at-olist-challenge/internal/services"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +18,6 @@ func main() {
 	books_controller := controllers.NewBooksController(book_service, author_service)
 
 
-
 	server := gin.Default()
 	server.POST("/books", books_controller.Create)
 	server.GET("/books", books_controller.List)
@@ -25,5 +25,6 @@ func main() {
 	server.DELETE("/books/:id", books_controller.Delete)
 	server.PUT("/books/:id", books_controller.Update)
 
+	fmt.Println("Server running on port 8080")
 	server.Run(":8080")
 }

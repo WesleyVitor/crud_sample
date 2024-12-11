@@ -11,18 +11,21 @@ type BookService struct {
 	db *gorm.DB
 }
 
+// Create a new BookService instance
 func NewBookService(db *gorm.DB) BookService {
 	return BookService{
 		db: db,
 	}
 }
 
+// Create a new book
 func (bs BookService) CreateBook(book models.Book) models.Book {
 	bs.db.Create(&book)
 
 	return book
 }
 
+// Get all books and preloads authors
 func (bs BookService) GetAllBooks() []models.Book {
 	var books []models.Book
 	bs.db.Preload("Authors").Find(&books)
@@ -31,6 +34,7 @@ func (bs BookService) GetAllBooks() []models.Book {
 
 }
 
+// Get a book by ID and preloads authors and return an error if the book is not found
 func (bs BookService) GetBookByID(id string) (models.Book, error) {
 
 	var book models.Book
@@ -42,6 +46,7 @@ func (bs BookService) GetBookByID(id string) (models.Book, error) {
 	return book, nil
 }
 
+// Delete a book by ID and return an error if the book is not found
 func (bs BookService) DeleteBookByID(id string) error {
 	var book models.Book
 	result := bs.db.First(&book, id)
@@ -53,6 +58,7 @@ func (bs BookService) DeleteBookByID(id string) error {
 	return nil
 }
 
+// Update a book by ID and return an error if the book is not found
 func (bs BookService) UpdateBookByID(id string, book models.Book) error {
 	var bookToUpdate models.Book
 	result := bs.db.First(&bookToUpdate, id)
